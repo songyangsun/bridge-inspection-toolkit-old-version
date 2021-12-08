@@ -55,7 +55,8 @@ def test_codebrim_basic():
 @pytest.mark.skipif(home_path in travis_homes,
                     reason="Long-running test with real datasets for local use only, not on Travis.")
 def test_codebrim_local():
-    # all_in_mem Test requires at least 8GB of free RAM to work
+
+    # all_in_mem Test requires at least 10GB of free RAM to work
     # all_in_mem = CodebrimDataset(split="", load_all_in_mem=True)
     all_in_mem_develmode = CodebrimDataset(split="", load_all_in_mem=True, devel_mode=True)
 

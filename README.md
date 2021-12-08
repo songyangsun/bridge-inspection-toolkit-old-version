@@ -19,8 +19,8 @@ This DataHub is build for [PyTorch](https://pytorch.org/).
 
 Name      | Type        | Unique images | Implemented | Fix eval set
 ----------|-------------|---------------|-------------|-------------
-CDS       | Binary Clf  |            1k |     not yet | ukn
-SDNETv1   | Binary Clf  |           13k |     not yet | ukn
+CDS [[Paper]](https://www.repository.cam.ac.uk/handle/1810/267902)      | Binary Clf  |            1k |     yes | yes
+SDNETv1 [[Paper]](https://www.repository.cam.ac.uk/handle/1810/267902)  | Binary Clf  |           56k |     yes | yes
 BCD  [[Paper]](https://www.mdpi.com/2076-3417/9/14/2867)  [[Data]](https://github.com/tjdxxhy/crack-detection)   | Binary Clf  |            6k |     yes | yes
 ICCD      | Binary Clf  |           60k |     not yet | ukn
 MCDS [[Paper]](https://www.researchgate.net/publication/332571358_Multi-classifier_for_Reinforced_Concrete_Bridge_Defects) [[Data]](https://zenodo.org/record/2601506)  | 10-Class Clf  | 3,617 | **yes** | no
@@ -117,7 +117,7 @@ Original version from [Mundt et al](https://openaccess.thecvf.com/content_CVPR_2
 
 ```python
 from bikit.utils import download_dataset
-from bikit.datasets.mcds import CodebrimDataset
+from bikit.datasets.codebrim import CodebrimDataset
 download_dataset("codebrim-classif-balanced") # Takes quite a time
 train_dataset = CodebrimDataset(split="train")
 ```
@@ -131,11 +131,38 @@ Bikit version of the bridge crack detection dataset.
 
 ```python
 from bikit.utils import download_dataset
-from bikit.datasets.mcds import BcdDataset
-download_dataset("bcd") 
+from bikit.datasets.bcd import BcdDataset
+download_dataset("sdnet") 
 train_dataset = BcdDataset(split="train", load_all_in_mem=True)
 test_dataset = BcdDataset(split="test")
 ```
+
+
+### `SDNET`
+
+Original version from [Maguire et al.](https://digitalcommons.usu.edu/all_datasets/48/)
+
+```python
+from bikit.utils import download_dataset
+from bikit.datasets.sdnet import SdnetDataset
+download_dataset("bcd") 
+train_dataset = SdnetDataset(split="train", load_all_in_mem=True)
+test_dataset = SdnetDataset(split="test")
+```
+
+### `Cambridge Bridge Inspection Dataset`
+
+Original version from [Huethwohl et al.](https://www.repository.cam.ac.uk/handle/1810/267902)
+
+```python
+from bikit.utils import download_dataset
+from bikit.datasets.cds import CdsDataset
+download_dataset("cds") 
+train_dataset = CdsDataset(split="train", load_all_in_mem=True)
+test_dataset = CdsDataset(split="test")
+```
+
+
 
 # PyTest
 
