@@ -247,11 +247,11 @@ if __name__ == "__main__":
 
     # list_datasets(verbose=True)
     #download_dataset(name='codebrim-classif-balanced', rm_zip_or_rar=True, force_redownload=True)
-    #download_dataset(name='cds', rm_zip_or_rar=True, force_redownload=True)
+    download_dataset(name='cds', rm_zip_or_rar=True, force_redownload=True)
     #download_dataset(name='sdnet', rm_zip_or_rar=True, force_redownload=True)
     # download_dataset(name='mcds_Bukhsh', cache_dir='~/.bikit', rm_zip_or_rar=True)
-    #download_dataset(name='bcd', cache_dir='~/.bikit', rm_zip_or_rar=True)
-    download_dataset(name="test_zip", force_redownload=True)
+    download_dataset(name='bcd', cache_dir='~/.bikit', rm_zip_or_rar=True)
+    #download_dataset(name="test_zip", force_redownload=True)
     print("===Download done===")
     from bikit.datasets.mcds import McdsDataset
     from torch.utils.data import DataLoader

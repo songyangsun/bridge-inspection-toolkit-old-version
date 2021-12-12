@@ -9,6 +9,7 @@ import torch
 import numpy as np
 from PIL import Image
 from pathlib import Path
+import os
 
 # Import module under test
 # sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
@@ -28,7 +29,6 @@ if home_path in travis_homes:
 
 def test_cds_basic():
     all_dataset = CdsDataset(split="")
-    cache_dir_dataset = CdsDataset(split="", cache_dir=".bikit/bcd/")
     transform_dataset = CdsDataset(split="",
                                   transform=transforms.Compose([transforms.Resize((256, 256)), transforms.ToTensor()]))
     train_dataset = CdsDataset(split="train")
@@ -47,7 +47,6 @@ def test_cds_basic():
     assert len(val_dataset) == 104
     assert len(test_dataset) == 100
     assert len(development_dataset) == 100
-    assert len(cache_dir_dataset) == 1028
     assert len(transform_dataset) == 1028
 
 @pytest.mark.skipif(home_path in travis_homes,
@@ -58,6 +57,11 @@ def test_cds_local():
 
     assert len(all_in_mem_dataset) == 1028
     assert len(all_in_mem_develmode) == 100
+
+    #Test correct cache_dir func
+    cache_test = CdsDataset(split="", cache_dir=Path(os.path.join(os.path.expanduser("~"), ".bikit")))
+    img, targets = cache_test[0]
+    assert list(targets.shape) == [2]
 
 if __name__ == '__main__':
     test_cds_local()

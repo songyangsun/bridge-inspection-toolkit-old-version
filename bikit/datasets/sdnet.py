@@ -37,9 +37,9 @@ class SdnetDataset(Dataset):
         # Misc
         self.split = split
         if cache_dir:
-            self.cache_full_dir = Path(os.path.join(cache_dir, name))
+            self.cache_full_dir = Path(cache_dir)
         else:
-            self.cache_full_dir = Path(os.path.join(os.path.expanduser("~"), ".bikit", name))
+            self.cache_full_dir = Path(os.path.join(os.path.expanduser("~"), ".bikit"))
 
         self.devel_mode = devel_mode
         self.class_names = self.DATASETS[name]["class_names"]

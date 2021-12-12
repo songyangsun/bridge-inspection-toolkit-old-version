@@ -9,6 +9,7 @@ import torch
 import numpy as np
 from PIL import Image
 from pathlib import Path
+import os
 
 # Import module under test
 # sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
@@ -28,7 +29,6 @@ if home_path in travis_homes:
 
 def test_sdnet_basic():
     all_dataset = SdnetDataset(split="")
-    cache_dir_dataset = SdnetDataset(split="", cache_dir=".bikit/bcd/")
     transform_dataset = SdnetDataset(split="",
                                   transform=transforms.Compose([transforms.Resize((256, 256)), transforms.ToTensor()]))
     train_dataset = SdnetDataset(split="train")
@@ -47,7 +47,6 @@ def test_sdnet_basic():
     assert len(val_dataset) == 2808
     assert len(test_dataset) == 2796
     assert len(development_dataset) == 100
-    assert len(cache_dir_dataset) == 56092
     assert len(transform_dataset) == 56092
 
 @pytest.mark.skipif(home_path in travis_homes,
@@ -61,6 +60,11 @@ def test_sdnet_local():
 
     #assert len(all_in_mem_dataset) == 56092
     assert len(all_in_mem_develmode) == 100
+
+    #Test correct cache_dir func
+    cache_test = SdnetDataset(split="", cache_dir=Path(os.path.join(os.path.expanduser("~"), ".bikit")))
+    img, targets = cache_test[0]
+    assert list(targets.shape) == [6]
 
 if __name__ == '__main__':
     test_sdnet_local()
